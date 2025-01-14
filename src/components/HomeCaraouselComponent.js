@@ -6,18 +6,27 @@ const { width } = Dimensions.get("window");
 const images = [
   {
     id: 1,
-    url: "https://th.bing.com/th/id/OIP.exnlWPDtW3gd4fOAprj4qgHaE7?rs=1&pid=ImgDetMain",
+    path: require('../../assets/images/f2.jpg')
   },
   {
     id: 2,
-    url: "https://th.bing.com/th/id/OIP.exnlWPDtW3gd4fOAprj4qgHaE7?rs=1&pid=ImgDetMain",
+    path: require('../../assets/images/f5.jpg')
+  },
+  {
+    id: 3,
+    path: require('../../assets/images/f3.jpg')
+  },
+  {
+    id: 4,
+    path: require('../../assets/images/f4.jpg')
+  },
+  {
+    id: 5,
+    path: require('../../assets/images/f6.jpg')
   },
 ];
 
-const data = [
-  { id: 1, title: "one" },
-  { id: 2, title: "two" },
-];
+
 const HomeCaraousel = () => {
   return (
     <View>
@@ -29,28 +38,33 @@ const HomeCaraousel = () => {
           overflow: "hidden",
           justifyContent: "center",
           alignItems: "center",
+          backgroundColor:theme.colors.offWhite
         }}
       >
-        <Image
+
+        <FlatList
+        data={images}
+        renderItem={({item})=>(
+          <Image source={item.path}  style={{ resizeMode: "cover", width: width - 2 * theme.sizes.medium, height: 200,marginRight:5,borderRadius:5 }} />
+        )}
+        horizontal
+        showsHorizontalScrollIndicator ={false}
+        keyExtractor={(item) => item.id.toString()}
+        snapToAlignment="center"
+        
+        
+        />
+
+        {/* <Image
           source={{
             uri: "https://th.bing.com/th/id/OIP.exnlWPDtW3gd4fOAprj4qgHaE7?rs=1&pid=ImgDetMain",
           }}
           style={{ resizeMode: "cover", width: "100%", height: "100%" }}
-        />
+        /> */}
+
+
       </View>
-      <View>
-        <FlatList
-          data={images}
-          renderItem={({ item }) => (
-            <Image
-              style={{ resizeMode: "cover", width: "100%", height: "100%" }}
-            source={item.url}
-            horizontal={true}
-            paddingEnabled={true}
-            />
-          )}
-        />
-      </View>
+   
     </View>
   );
 };
